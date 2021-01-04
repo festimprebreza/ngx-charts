@@ -110,6 +110,7 @@ export class HeatMapComponent extends BaseChartComponent {
   @Input() min: any;
   @Input() max: any;
   @Input() activeEntries: any[] = [];
+  @Input() yDomainValues: any[];
 
   @Output() activate: EventEmitter<any> = new EventEmitter();
   @Output() deactivate: EventEmitter<any> = new EventEmitter();
@@ -139,7 +140,12 @@ export class HeatMapComponent extends BaseChartComponent {
     this.formatDates();
 
     this.xDomain = this.getXDomain();
-    this.yDomain = this.getYDomain();
+    if(this.yDomainValues) {
+      this.yDomain = this.yDomainValues;
+    }
+    else {
+      this.yDomain = this.getYDomain();
+    }
     this.valueDomain = this.getValueDomain();
 
     this.scaleType = getScaleType(this.valueDomain, false);
